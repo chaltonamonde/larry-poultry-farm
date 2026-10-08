@@ -132,7 +132,7 @@ export const ChicksPage: React.FC<ChicksPageProps> = ({ setActivePage }) => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
             gap: '24px'
           }}
         >
@@ -143,7 +143,7 @@ export const ChicksPage: React.FC<ChicksPageProps> = ({ setActivePage }) => {
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-card)',
                 borderRadius: 'var(--radius-xl)',
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '16px'
@@ -175,13 +175,13 @@ export const ChicksPage: React.FC<ChicksPageProps> = ({ setActivePage }) => {
                   gap: '6px'
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '4px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Maturity:</span>
                   <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{b.growthPeriod}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Feed Conversion:</span>
-                  <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{b.feedEfficiency}</span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 600, overflowWrap: 'anywhere' }}>{b.feedEfficiency}</span>
                 </div>
               </div>
 
@@ -220,10 +220,10 @@ export const ChicksPage: React.FC<ChicksPageProps> = ({ setActivePage }) => {
             backgroundColor: 'var(--bg-section-alt)',
             border: '1px solid var(--border-card)',
             borderRadius: 'var(--radius-xl)',
-            padding: 'clamp(24px, 4vw, 36px)',
+            padding: 'clamp(16px, 4vw, 36px)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '32px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
+            gap: '24px'
           }}
         >
           <div>
@@ -248,19 +248,19 @@ export const ChicksPage: React.FC<ChicksPageProps> = ({ setActivePage }) => {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.85rem' }}>
-                <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary-green)', marginTop: '8px' }} />
+                <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary-green)', marginTop: '8px', flexShrink: 0 }} />
                 <span style={{ color: 'var(--text-secondary)' }}>
                   <strong>Pre-heat the brooder 4-6 hours</strong> prior to chick arrival to reach 32°C - 35°C at chick level.
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.85rem' }}>
-                <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary-green)', marginTop: '8px' }} />
+                <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary-green)', marginTop: '8px', flexShrink: 0 }} />
                 <span style={{ color: 'var(--text-secondary)' }}>
                   <strong>First 2 hours:</strong> Offer lukewarm water mixed with glucose or multivitamin stress packs before providing solid chick starter crumb.
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.85rem' }}>
-                <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary-green)', marginTop: '8px' }} />
+                <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--primary-green)', marginTop: '8px', flexShrink: 0 }} />
                 <span style={{ color: 'var(--text-secondary)' }}>
                   <strong>Litter bedding:</strong> Spread dry wood shavings (not fine sawdust) 5-7cm deep on disinfected concrete or dry earth floors.
                 </span>
@@ -272,7 +272,7 @@ export const ChicksPage: React.FC<ChicksPageProps> = ({ setActivePage }) => {
                 type="button"
                 onClick={() => setActivePage('advice')}
                 className="btn btn-secondary"
-                style={{ fontSize: '0.85rem' }}
+                style={{ fontSize: '0.85rem', width: '100%', maxWidth: '320px', whiteSpace: 'normal', textAlign: 'center' }}
               >
                 Read Full 0-18 Week Vaccination Guide →
               </button>
@@ -285,7 +285,7 @@ export const ChicksPage: React.FC<ChicksPageProps> = ({ setActivePage }) => {
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border-card)',
               borderRadius: 'var(--radius-lg)',
-              padding: '24px',
+              padding: 'clamp(16px, 3vw, 24px)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',

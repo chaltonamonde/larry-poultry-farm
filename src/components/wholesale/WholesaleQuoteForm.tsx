@@ -104,9 +104,9 @@ export const WholesaleQuoteForm: React.FC = () => {
             type="button"
             onClick={handleSendViaWhatsApp}
             className="btn-whatsapp"
-            style={{ marginTop: '8px' }}
+            style={{ marginTop: '8px', width: '100%', maxWidth: '100%', minHeight: '44px', whiteSpace: 'normal', padding: '12px 14px' }}
           >
-            <MessageCircle size={18} />
+            <MessageCircle size={18} style={{ flexShrink: 0 }} />
             <span>Fast-Track on WhatsApp for Instant Contract Pricing</span>
           </button>
         </div>
@@ -276,8 +276,8 @@ export const WholesaleQuoteForm: React.FC = () => {
           </div>
 
           <div className="btn-group-responsive" style={{ gap: '12px' }}>
-            <button type="submit" className="btn-primary" style={{ flex: 1 }}>
-              <Send size={18} />
+            <button type="submit" className="btn-primary" style={{ flex: 1, minHeight: '44px', whiteSpace: 'normal', padding: '12px 14px' }}>
+              <Send size={18} style={{ flexShrink: 0 }} />
               <span>Submit Formal Quote Request</span>
             </button>
 
@@ -285,9 +285,9 @@ export const WholesaleQuoteForm: React.FC = () => {
               type="button"
               onClick={handleSendViaWhatsApp}
               className="btn-whatsapp"
-              style={{ flex: 1 }}
+              style={{ flex: 1, minHeight: '44px', whiteSpace: 'normal', padding: '12px 14px' }}
             >
-              <MessageCircle size={18} />
+              <MessageCircle size={18} style={{ flexShrink: 0 }} />
               <span>Direct WhatsApp B2B Desk</span>
             </button>
           </div>

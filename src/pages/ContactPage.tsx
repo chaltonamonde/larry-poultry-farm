@@ -107,8 +107,8 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '36px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: '28px'
           }}
         >
           {/* Left Column: Direct Contacts & Hours */}
@@ -119,7 +119,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-card)',
                 borderRadius: 'var(--radius-xl)',
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '20px'
@@ -228,7 +228,9 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                       fontSize: '0.92rem',
                       fontWeight: 500,
                       color: 'var(--text-primary)',
-                      textDecoration: 'none'
+                      textDecoration: 'none',
+                      overflowWrap: 'anywhere',
+                      wordBreak: 'break-word'
                     }}
                   >
                     {FARM_CONFIG.email}
@@ -313,7 +315,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border-card)',
               borderRadius: 'var(--radius-xl)',
-              padding: 'clamp(20px, 4vw, 32px)',
+              padding: 'clamp(16px, 3vw, 32px)',
               display: 'flex',
               flexDirection: 'column',
               gap: '20px'
@@ -377,13 +379,13 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                       border: '1px solid var(--border-card)',
                       borderRadius: 'var(--radius-md)',
                       color: 'var(--text-primary)',
-                      fontSize: '0.88rem',
+                      fontSize: '16px',
                       outline: 'none'
                     }}
                   />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '14px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))', gap: '14px' }}>
                   <div>
                     <label htmlFor="contact-phone" style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>
                       Phone (Calls / WhatsApp) *
@@ -402,7 +404,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                         border: '1px solid var(--border-card)',
                         borderRadius: 'var(--radius-md)',
                         color: 'var(--text-primary)',
-                        fontSize: '0.88rem',
+                        fontSize: '16px',
                         outline: 'none'
                       }}
                     />
@@ -425,7 +427,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                         border: '1px solid var(--border-card)',
                         borderRadius: 'var(--radius-md)',
                         color: 'var(--text-primary)',
-                        fontSize: '0.88rem',
+                        fontSize: '16px',
                         outline: 'none'
                       }}
                     />
@@ -447,7 +449,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                       border: '1px solid var(--border-card)',
                       borderRadius: 'var(--radius-md)',
                       color: 'var(--text-primary)',
-                      fontSize: '0.88rem',
+                      fontSize: '16px',
                       outline: 'none',
                       cursor: 'pointer'
                     }}
@@ -477,7 +479,7 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                       border: '1px solid var(--border-card)',
                       borderRadius: 'var(--radius-md)',
                       color: 'var(--text-primary)',
-                      fontSize: '0.88rem',
+                      fontSize: '16px',
                       outline: 'none',
                       resize: 'vertical'
                     }}
@@ -485,14 +487,14 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '6px' }}>
-                  <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
+                  <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', minHeight: '44px', whiteSpace: 'normal', padding: '12px 14px' }}>
                     <Send size={16} /> Submit Message via Site
                   </button>
                   <button
                     type="button"
                     onClick={handleSendViaWhatsApp}
                     className="btn btn-whatsapp"
-                    style={{ width: '100%', justifyContent: 'center' }}
+                    style={{ width: '100%', justifyContent: 'center', minHeight: '44px', whiteSpace: 'normal', padding: '12px 14px' }}
                   >
                     <MessageCircle size={16} /> Or Send Straight to WhatsApp
                   </button>
@@ -538,7 +540,53 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
             overflow: 'hidden'
           }}
         >
-          <div style={{ overflowX: 'auto' }}>
+          {/* Mobile Stacked Cards (< 640px) */}
+          <div className="delivery-cards-mobile" style={{ display: 'none', padding: '16px', flexDirection: 'column', gap: '12px' }}>
+            {DELIVERY_TOWNS.map((town) => (
+              <div
+                key={town.id}
+                style={{
+                  backgroundColor: 'var(--bg-page)',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '6px' }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.92rem', color: 'var(--text-primary)' }}>
+                    {town.name}
+                    {town.isFarmPickup && (
+                      <span
+                        style={{
+                          marginLeft: '6px',
+                          fontSize: '0.7rem',
+                          padding: '2px 6px',
+                          backgroundColor: 'rgba(34, 197, 94, 0.15)',
+                          color: 'var(--primary-green)',
+                          borderRadius: 'var(--radius-sm)'
+                        }}
+                      >
+                        Self-Collection
+                      </span>
+                    )}
+                  </div>
+                  <span style={{ fontSize: '0.92rem', fontWeight: 700, color: town.feeKes === 0 ? 'var(--primary-green)' : 'var(--text-primary)' }}>
+                    {town.feeKes === 0 ? 'FREE' : `KES ${town.feeKes}`}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                  <span>County: <strong>{town.county}</strong></span>
+                  <span>Lead Time: <strong>{town.estimatedTransit}</strong></span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table View (>= 640px) */}
+          <div className="table-responsive delivery-table-desktop">
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '580px' }}>
               <thead>
                 <tr style={{ backgroundColor: 'var(--bg-section-alt)', borderBottom: '1px solid var(--border-card)' }}>

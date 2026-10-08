@@ -47,7 +47,7 @@ export const HatchCalendar: React.FC = () => {
               }}
             >
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
                   <span
                     style={{
                       fontSize: '0.75rem',
@@ -139,7 +139,7 @@ export const HatchCalendar: React.FC = () => {
                 type="button"
                 onClick={() => handleReserveBatch(batch)}
                 className="btn-primary"
-                style={{ width: '100%', fontSize: '0.92rem' }}
+                style={{ width: '100%', fontSize: '0.92rem', padding: '12px 14px', minHeight: '44px', whiteSpace: 'normal', textAlign: 'center' }}
               >
                 <span>Reserve with KES {minDeposit.toLocaleString()} Deposit</span>
                 <ArrowRight size={16} />

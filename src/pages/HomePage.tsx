@@ -135,11 +135,13 @@ export const HomePage: React.FC<HomePageProps> = ({ setActivePage }) => {
                 borderRadius: 'var(--radius-full)',
                 padding: '6px 14px',
                 marginBottom: '18px',
-                backdropFilter: 'blur(8px)'
+                backdropFilter: 'blur(8px)',
+                maxWidth: '100%',
+                flexWrap: 'wrap'
               }}
             >
-              <ShieldCheck size={16} color="var(--primary-green)" />
-              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#4ade80', letterSpacing: '0.02em' }}>
+              <ShieldCheck size={16} color="var(--primary-green)" style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#4ade80', letterSpacing: '0.02em', overflowWrap: 'anywhere' }}>
                 KENYA'S TRUSTED BIOSECURE POULTRY BREEDER
               </span>
             </div>

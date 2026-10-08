@@ -110,12 +110,12 @@ export const CheckoutModal: React.FC = () => {
           backgroundColor: 'var(--bg-card)',
           border: '1px solid var(--border-card)',
           borderRadius: 'var(--radius-xl)',
-          width: 'min(100vw - 32px, 560px)',
-          maxHeight: 'min(94vh, 850px)',
+          width: 'min(calc(100vw - 16px), 560px)',
+          maxHeight: 'min(94dvh, 850px)',
           overflowY: 'auto',
           boxShadow: 'var(--shadow-lg)',
           position: 'relative',
-          padding: '24px'
+          padding: 'clamp(16px, 3vw, 24px)'
         }}
       >
         {/* Header & Steps Indicator */}

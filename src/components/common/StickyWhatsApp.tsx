@@ -111,7 +111,7 @@ export const StickyWhatsApp: React.FC = () => {
                 value={quickMsg}
                 onChange={e => setQuickMsg(e.target.value)}
                 placeholder="Type your message..."
-                style={{ fontSize: '0.82rem', padding: '8px 10px' }}
+                style={{ fontSize: '16px', padding: '8px 10px', width: '100%', minWidth: 0 }}
                 onKeyDown={e => {
                   if (e.key === 'Enter') handleSend();
                 }}

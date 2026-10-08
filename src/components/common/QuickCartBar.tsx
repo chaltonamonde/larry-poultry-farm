@@ -14,8 +14,8 @@ export const QuickCartBar: React.FC = () => {
       style={{
         position: 'fixed',
         bottom: 'calc(16px + var(--safe-bottom))',
-        left: '16px',
-        right: '84px', // Keeps space clear for StickyWhatsApp button on the right
+        left: 'clamp(8px, 2vw, 16px)',
+        right: 'clamp(68px, 15vw, 84px)', // Keeps space clear for StickyWhatsApp button on the right
         zIndex: 970,
         maxWidth: '480px'
       }}
@@ -26,7 +26,7 @@ export const QuickCartBar: React.FC = () => {
           backgroundColor: 'var(--bg-card)',
           border: '1px solid var(--primary-green)',
           borderRadius: 'var(--radius-full)',
-          padding: '8px 16px',
+          padding: 'clamp(6px, 1.5vw, 8px) clamp(8px, 2.5vw, 16px)',
           boxShadow: 'var(--shadow-lg)',
           display: 'flex',
           alignItems: 'center',

@@ -150,8 +150,8 @@ export const WholesalePage: React.FC<WholesalePageProps> = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '24px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
+            gap: '20px'
           }}
         >
           {wholesalePerks.map((perk, i) => (
@@ -161,7 +161,7 @@ export const WholesalePage: React.FC<WholesalePageProps> = () => {
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-card)',
                 borderRadius: 'var(--radius-xl)',
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '12px'
@@ -196,7 +196,7 @@ export const WholesalePage: React.FC<WholesalePageProps> = () => {
             backgroundColor: 'var(--bg-section-alt)',
             border: '1px solid var(--border-card)',
             borderRadius: 'var(--radius-xl)',
-            padding: 'clamp(24px, 4vw, 40px)'
+            padding: 'clamp(16px, 4vw, 40px)'
           }}
         >
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
@@ -211,8 +211,8 @@ export const WholesalePage: React.FC<WholesalePageProps> = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-              gap: '20px'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
+              gap: '16px'
             }}
           >
             {targetSectors.map((sector, idx) => (
@@ -220,7 +220,7 @@ export const WholesalePage: React.FC<WholesalePageProps> = () => {
                 key={idx}
                 style={{
                   backgroundColor: 'var(--bg-card)',
-                  padding: '20px',
+                  padding: 'clamp(14px, 3vw, 20px)',
                   borderRadius: 'var(--radius-lg)',
                   border: '1px solid var(--border-card)',
                   display: 'flex',

@@ -55,8 +55,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
           backgroundColor: 'var(--bg-card)',
           border: '1px solid var(--border-card)',
           borderRadius: 'var(--radius-xl)',
-          width: 'min(100vw - 32px, 680px)',
-          maxHeight: 'min(92vh, 880px)',
+          width: 'min(calc(100vw - 16px), 680px)',
+          maxHeight: 'min(92dvh, 880px)',
           overflowY: 'auto',
           boxShadow: 'var(--shadow-lg)',
           position: 'relative'
@@ -95,7 +95,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
             alt={product.name}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
-          <div style={{ position: 'absolute', bottom: '12px', left: '16px', display: 'flex', gap: '8px' }}>
+          <div style={{ position: 'absolute', bottom: '12px', left: '16px', right: '16px', display: 'flex', gap: '8px', flexWrap: 'wrap', maxWidth: 'calc(100% - 32px)' }}>
             <Badge type={product.availability} />
             <span
               style={{
@@ -104,7 +104,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
                 padding: '4px 10px',
                 borderRadius: 'var(--radius-full)',
                 fontSize: '0.8rem',
-                border: '1px solid var(--border-card)'
+                border: '1px solid var(--border-card)',
+                maxWidth: 'calc(100% - 24px)',
+                overflowWrap: 'anywhere'
               }}
             >
               {product.packSize}
@@ -113,7 +115,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
         </div>
 
         {/* Modal Body */}
-        <div style={{ padding: '24px' }}>
+        <div style={{ padding: 'clamp(16px, 3vw, 24px)' }}>
           <h2 id="product-modal-title" style={{ fontSize: '1.4rem', marginBottom: '8px' }}>
             {product.name}
           </h2>
@@ -252,20 +254,20 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
                   onClose();
                 }}
                 className="btn-primary"
-                style={{ flex: 1 }}
+                style={{ flex: 1, minHeight: '44px', whiteSpace: 'normal', padding: '12px 14px' }}
               >
-                <ShoppingCart size={18} />
-                Add {quantity} to Cart
+                <ShoppingCart size={18} style={{ flexShrink: 0 }} />
+                <span>Add {quantity} to Cart</span>
               </button>
 
               <button
                 type="button"
                 onClick={handleWhatsApp}
                 className="btn-whatsapp"
-                style={{ flex: 1 }}
+                style={{ flex: 1, minHeight: '44px', whiteSpace: 'normal', padding: '12px 14px' }}
               >
-                <MessageCircle size={18} />
-                Order via WhatsApp
+                <MessageCircle size={18} style={{ flexShrink: 0 }} />
+                <span>Order via WhatsApp</span>
               </button>
             </div>
           </div>

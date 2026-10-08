@@ -243,9 +243,8 @@ export const ShopPage: React.FC<ShopPageProps> = ({ setActivePage }) => {
             style={{
               display: 'flex',
               gap: '8px',
-              overflowX: 'auto',
-              paddingBottom: '4px',
-              scrollbarWidth: 'thin'
+              flexWrap: 'wrap',
+              paddingBottom: '4px'
             }}
           >
             {categories.map((cat) => {

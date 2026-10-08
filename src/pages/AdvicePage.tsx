@@ -101,7 +101,7 @@ export const AdvicePage: React.FC<AdvicePageProps> = () => {
           style={{
             display: 'flex',
             gap: '8px',
-            overflowX: 'auto',
+            flexWrap: 'wrap',
             paddingBottom: '8px',
             marginBottom: '32px'
           }}
@@ -136,7 +136,7 @@ export const AdvicePage: React.FC<AdvicePageProps> = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '24px'
           }}
         >
@@ -147,7 +147,7 @@ export const AdvicePage: React.FC<AdvicePageProps> = () => {
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-card)',
                 borderRadius: 'var(--radius-xl)',
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -321,9 +321,8 @@ export const AdvicePage: React.FC<AdvicePageProps> = () => {
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border-card)',
               borderRadius: 'var(--radius-xl)',
-              width: '100%',
-              maxWidth: '760px',
-              maxHeight: '90vh',
+              width: 'min(calc(100vw - 32px), 760px)',
+              maxHeight: 'min(90dvh, 850px)',
               overflowY: 'auto',
               display: 'flex',
               flexDirection: 'column'
@@ -336,7 +335,7 @@ export const AdvicePage: React.FC<AdvicePageProps> = () => {
                 top: 0,
                 backgroundColor: 'var(--bg-card)',
                 borderBottom: '1px solid var(--border-card)',
-                padding: '16px 24px',
+                padding: 'clamp(14px, 3vw, 24px)',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',

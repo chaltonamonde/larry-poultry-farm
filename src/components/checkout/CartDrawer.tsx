@@ -73,7 +73,7 @@ export const CartDrawer: React.FC = () => {
         {/* Header */}
         <div
           style={{
-            padding: '16px 20px',
+            padding: '16px clamp(12px, 3vw, 20px)',
             borderBottom: '1px solid var(--border-card)',
             display: 'flex',
             alignItems: 'center',
@@ -145,7 +145,7 @@ export const CartDrawer: React.FC = () => {
             </button>
           </div>
         ) : (
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '16px 20px' }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '16px clamp(12px, 3vw, 20px)' }}>
             {/* Free Shipping Bar */}
             <FreeShippingBar />
 
@@ -293,7 +293,7 @@ export const CartDrawer: React.FC = () => {
                   const town = DELIVERY_TOWNS.find(t => t.id === e.target.value);
                   if (town) setSelectedTown(town);
                 }}
-                style={{ fontSize: '0.88rem', padding: '10px' }}
+                style={{ fontSize: '16px', padding: '10px', width: '100%' }}
               >
                 {DELIVERY_TOWNS.map(town => (
                   <option key={town.id} value={town.id}>

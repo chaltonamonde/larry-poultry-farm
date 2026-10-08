@@ -95,7 +95,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               borderRadius: 'var(--radius-sm)',
               fontSize: '0.75rem',
               color: 'var(--text-secondary)',
-              border: '1px solid var(--border-card)'
+              border: '1px solid var(--border-card)',
+              maxWidth: 'calc(100% - 24px)',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap'
             }}
           >
             {product.packSize}
@@ -208,20 +212,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           type="button"
           onClick={handleAddToCart}
           className="btn-primary"
-          style={{ width: '100%', fontSize: '0.9rem', padding: '10px 14px' }}
+          style={{ width: '100%', fontSize: '0.9rem', padding: '10px 14px', minHeight: '44px', whiteSpace: 'normal' }}
         >
           <ShoppingCart size={16} />
-          {product.availability === 'pre-order' ? 'Pre-Order Now' : 'Add to Cart'}
+          <span>{product.availability === 'pre-order' ? 'Pre-Order Now' : 'Add to Cart'}</span>
         </button>
 
         <button
           type="button"
           onClick={handleWhatsAppOrder}
           className="btn-whatsapp"
-          style={{ width: '100%', fontSize: '0.9rem', padding: '10px 14px' }}
+          style={{ width: '100%', fontSize: '0.9rem', padding: '10px 14px', minHeight: '44px', whiteSpace: 'normal' }}
         >
           <MessageCircle size={16} />
-          Order on WhatsApp
+          <span>Order on WhatsApp</span>
         </button>
       </div>
     </article>

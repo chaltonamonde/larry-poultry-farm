@@ -134,16 +134,18 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage }) => 
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontWeight: 800,
-                  fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)',
+                  fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
                   color: 'var(--text-primary)',
                   letterSpacing: '-0.02em',
                   display: 'block',
-                  lineHeight: 1.1
+                  lineHeight: 1.1,
+                  whiteSpace: 'nowrap'
                 }}
               >
                 Larry Poultry Farm
               </span>
               <span
+                className="hide-on-very-small"
                 style={{
                   fontSize: '0.72rem',
                   color: 'var(--text-muted)',
@@ -249,10 +251,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage }) => 
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-card)',
                 borderRadius: 'var(--radius-md)',
-                padding: '8px 14px',
+                padding: '8px 10px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
+                gap: '6px',
                 minHeight: '38px',
                 color: 'var(--text-primary)',
                 position: 'relative'
@@ -260,7 +262,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage }) => 
               aria-label="View Shopping Cart"
             >
               <ShoppingCart size={18} color="var(--primary-green)" />
-              <span style={{ fontWeight: 700, fontSize: '0.88rem' }}>Cart</span>
+              <span className="hide-on-very-small" style={{ fontWeight: 700, fontSize: '0.88rem' }}>Cart</span>
               {totalItemsCount > 0 && (
                 <span
                   style={{
