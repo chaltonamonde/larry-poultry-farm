@@ -294,6 +294,22 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
             >
               Terms of Supply
             </button>
+            <button
+              onClick={() => navigateTo('admin')}
+              style={{
+                color: 'var(--primary-green)',
+                fontWeight: 700,
+                fontSize: '0.8rem',
+                minHeight: 'auto',
+                padding: '2px 8px',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                border: '1px solid rgba(34, 197, 94, 0.3)'
+              }}
+              title="Access Larry Poultry Farm Manager ERP (Finances, Orders, Messages)"
+            >
+              🔒 Farm Manager ERP (PIN: 1234)
+            </button>
           </div>
         </div>
       </div>

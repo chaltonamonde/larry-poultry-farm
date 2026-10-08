@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { ActivePage } from '../types';
 import { FARM_CONFIG, DELIVERY_TOWNS } from '../data/farmData';
 import { useToast } from '../context/ToastContext';
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Truck, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { useAdmin } from '../context/AdminContext';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Truck, CheckCircle2 } from 'lucide-react';
 
 interface ContactPageProps {
   setActivePage: (page: ActivePage) => void;
@@ -10,6 +11,7 @@ interface ContactPageProps {
 
 export const ContactPage: React.FC<ContactPageProps> = () => {
   const { addToast } = useToast();
+  const { addCustomerMessage } = useAdmin();
   const [formState, setFormState] = useState({
     name: '',
     phone: '',
@@ -30,6 +32,14 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
       return;
     }
     setIsSubmitted(true);
+    addCustomerMessage({
+      senderName: formState.name,
+      senderPhone: formState.phone,
+      senderEmail: formState.email,
+      subject: formState.subject,
+      message: formState.message || 'General poultry inquiry',
+      source: 'contact-form'
+    });
     addToast({
       type: 'success',
       title: 'Enquiry Received!',

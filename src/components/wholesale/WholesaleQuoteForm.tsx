@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { FARM_CONFIG } from '../../data/farmData';
 import { useToast } from '../../context/ToastContext';
+import { useAdmin } from '../../context/AdminContext';
 import { ShieldCheck, Clock, CheckCircle2, Send, MessageCircle, Building2, Calendar } from 'lucide-react';
 
 export const WholesaleQuoteForm: React.FC = () => {
   const { addToast } = useToast();
+  const { addWholesaleLead } = useAdmin();
   const [businessName, setBusinessName] = useState('');
   const [contactPerson, setContactPerson] = useState('');
   const [phone, setPhone] = useState('');
@@ -24,6 +26,18 @@ export const WholesaleQuoteForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
+    addWholesaleLead({
+      businessName,
+      contactPerson,
+      businessType,
+      phone,
+      town,
+      weeklyEggsCrates: weeklyEggs,
+      weeklyBroilers,
+      estimatedWeeklyValueKes: estimatedWeeklyValue,
+      standingOrderFrequency: frequency,
+      specialRequirements: specialReq
+    });
     addToast({
       type: 'success',
       title: 'Wholesale Inquiry Received',

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { ActivePage } from '../../types';
 import { useCart } from '../../context/CartContext';
 import { useTheme } from '../../context/ThemeContext';
+import { useAdmin } from '../../context/AdminContext';
 import { FARM_CONFIG } from '../../data/farmData';
-import { ShoppingCart, Menu, X, Phone, MessageCircle, Moon, Sun, Sparkles, MapPin } from 'lucide-react';
+import { ShoppingCart, Menu, X, Phone, MessageCircle, Moon, Sun, Sparkles, MapPin, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   activePage: ActivePage;
@@ -13,7 +14,12 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage }) => {
   const { totalItemsCount, setIsCartOpen } = useCart();
   const { theme, toggleTheme } = useTheme();
+  const { orders, messages } = useAdmin();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const pendingOrders = orders.filter(o => o.status === 'pending' || o.status === 'processing').length;
+  const unreadMessages = messages.filter(m => m.status === 'unread').length;
+  const adminNotificationCount = pendingOrders + unreadMessages;
 
   const navLinks: { page: ActivePage; label: string; badge?: string }[] = [
     { page: 'home', label: 'Home' },
@@ -243,6 +249,50 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage }) => 
               )}
             </button>
 
+            {/* Farm Manager Portal Button */}
+            <button
+              type="button"
+              onClick={() => handleNavClick('admin')}
+              style={{
+                backgroundColor: activePage === 'admin' ? 'rgba(34, 197, 94, 0.2)' : 'var(--bg-card)',
+                border: activePage === 'admin' ? '1px solid var(--primary-green)' : '1px solid var(--border-card)',
+                color: activePage === 'admin' ? 'var(--primary-green)' : 'var(--text-secondary)',
+                borderRadius: 'var(--radius-md)',
+                padding: '8px 10px',
+                fontSize: '0.78rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                minHeight: '38px',
+                position: 'relative'
+              }}
+              title="Farm Operations & Admin ERP"
+              aria-label="Farm Manager Admin Portal"
+            >
+              <ShieldCheck size={16} color="var(--primary-green)" />
+              <span className="hide-on-very-small" style={{ fontWeight: 600 }}>Manager</span>
+              {adminNotificationCount > 0 && (
+                <span
+                  style={{
+                    backgroundColor: '#ef4444',
+                    color: '#ffffff',
+                    fontSize: '0.68rem',
+                    fontWeight: 800,
+                    borderRadius: 'var(--radius-full)',
+                    minWidth: '18px',
+                    height: '18px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0 4px'
+                  }}
+                  title={`${adminNotificationCount} pending orders / unread messages`}
+                >
+                  {adminNotificationCount}
+                </span>
+              )}
+            </button>
+
             {/* Cart Button */}
             <button
               type="button"
@@ -361,6 +411,44 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage }) => 
               </button>
             );
           })}
+
+          {/* Mobile Admin ERP Portal Link */}
+          <button
+            type="button"
+            onClick={() => handleNavClick('admin')}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '12px 14px',
+              borderRadius: 'var(--radius-md)',
+              backgroundColor: activePage === 'admin' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(34, 197, 94, 0.08)',
+              border: '1px solid var(--primary-green)',
+              color: 'var(--primary-green)',
+              fontWeight: 700,
+              fontSize: '0.95rem'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <ShieldCheck size={18} />
+              <span>Farm Operations & Admin ERP</span>
+            </div>
+            {adminNotificationCount > 0 && (
+              <span
+                style={{
+                  backgroundColor: '#ef4444',
+                  color: '#ffffff',
+                  fontSize: '0.72rem',
+                  fontWeight: 800,
+                  borderRadius: 'var(--radius-full)',
+                  padding: '2px 8px'
+                }}
+              >
+                {adminNotificationCount}
+              </span>
+            )}
+          </button>
 
           <div
             style={{

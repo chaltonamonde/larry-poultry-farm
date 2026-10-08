@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useCart } from '../../context/CartContext';
+import { useAdmin } from '../../context/AdminContext';
 import { FARM_CONFIG } from '../../data/farmData';
 import { useToast } from '../../context/ToastContext';
 import { X, CheckCircle2, Phone, ShieldCheck, ArrowRight, ArrowLeft, Loader2, MessageCircle, AlertCircle, Copy } from 'lucide-react';
@@ -17,6 +18,7 @@ export const CheckoutModal: React.FC = () => {
     depositTotalKes
   } = useCart();
 
+  const { addOrder } = useAdmin();
   const { addToast } = useToast();
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -58,9 +60,32 @@ export const CheckoutModal: React.FC = () => {
     // Simulate Daraja STK Push delay
     setTimeout(() => {
       const randomReceipt = 'QKL' + Math.floor(10000000 + Math.random() * 90000000);
-      const randomOrderId = 'LPF-' + Math.floor(1000 + Math.random() * 9000);
+      const newOrderId = addOrder({
+        customerName: fullName,
+        customerPhone: phone,
+        deliveryTown: selectedTown.name,
+        estateAddress,
+        deliveryNotes,
+        items: cartItems.map((item) => ({
+          productId: item.product.id,
+          name: item.product.name,
+          packSize: item.product.packSize,
+          quantity: item.quantity,
+          unitPriceKes: item.product.priceKes,
+          totalKes: item.quantity * item.product.priceKes,
+          isPreOrder: item.isPreOrder
+        })),
+        subtotalKes,
+        deliveryFeeKes: effectiveDeliveryFeeKes,
+        grandTotalKes,
+        status: 'processing',
+        paymentMethod: 'mpesa',
+        paymentStatus: 'paid-mpesa',
+        mpesaReceiptCode: randomReceipt
+      });
+
       setMpesaReceiptCode(randomReceipt);
-      setGeneratedOrderId(randomOrderId);
+      setGeneratedOrderId(newOrderId);
       setIsSimulatingSTK(false);
       setStkStatus('success');
       setStep(3);
@@ -69,8 +94,31 @@ export const CheckoutModal: React.FC = () => {
   };
 
   const handleConfirmPayOnDelivery = () => {
-    const randomOrderId = 'LPF-COD-' + Math.floor(1000 + Math.random() * 9000);
-    setGeneratedOrderId(randomOrderId);
+    const newOrderId = addOrder({
+      customerName: fullName,
+      customerPhone: phone,
+      deliveryTown: selectedTown.name,
+      estateAddress,
+      deliveryNotes,
+      items: cartItems.map((item) => ({
+        productId: item.product.id,
+        name: item.product.name,
+        packSize: item.product.packSize,
+        quantity: item.quantity,
+        unitPriceKes: item.product.priceKes,
+        totalKes: item.quantity * item.product.priceKes,
+        isPreOrder: item.isPreOrder
+      })),
+      subtotalKes,
+      deliveryFeeKes: effectiveDeliveryFeeKes,
+      grandTotalKes,
+      status: 'pending',
+      paymentMethod: 'cod',
+      paymentStatus: 'pending-cod',
+      mpesaReceiptCode: 'PAY-ON-DELIVERY'
+    });
+
+    setGeneratedOrderId(newOrderId);
     setMpesaReceiptCode('PAY-ON-DELIVERY');
     setStep(3);
     clearCart();
