@@ -177,7 +177,7 @@ export const OrdersTab: React.FC = () => {
           padding: '16px'
         }}
       >
-        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
+        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px', scrollbarWidth: 'none' }}>
           {[
             { id: 'all', label: 'All Orders', count: statusCounts.all },
             { id: 'pending', label: 'Pending Confirmation', count: statusCounts.pending },

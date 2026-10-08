@@ -177,61 +177,65 @@ export const HatcheryFlockTab: React.FC = () => {
         </div>
 
         {isEditingMetrics ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-            <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-              Eggs (Crates):
-              <input
-                type="number"
-                value={tempEggsCollected}
-                onChange={(e) => setTempEggsCollected(parseInt(e.target.value) || 0)}
-                style={{ width: '70px', marginLeft: '4px', padding: '4px 6px', backgroundColor: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '4px', color: '#fff', fontSize: '16px' }}
-              />
-            </label>
-            <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-              Lay %:
-              <input
-                type="number"
-                step="0.1"
-                value={tempLayRate}
-                onChange={(e) => setTempLayRate(parseFloat(e.target.value) || 0)}
-                style={{ width: '70px', marginLeft: '4px', padding: '4px 6px', backgroundColor: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '4px', color: '#fff', fontSize: '16px' }}
-              />
-            </label>
-            <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-              Feed Bags:
-              <input
-                type="number"
-                value={tempFeedBags}
-                onChange={(e) => setTempFeedBags(parseInt(e.target.value) || 0)}
-                style={{ width: '70px', marginLeft: '4px', padding: '4px 6px', backgroundColor: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '4px', color: '#fff', fontSize: '16px' }}
-              />
-            </label>
-            <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-              Brooder °C:
-              <input
-                type="number"
-                step="0.5"
-                value={tempBrooderTemp}
-                onChange={(e) => setTempBrooderTemp(parseFloat(e.target.value) || 0)}
-                style={{ width: '70px', marginLeft: '4px', padding: '4px 6px', backgroundColor: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '4px', color: '#fff', fontSize: '16px' }}
-              />
-            </label>
-            <button
-              type="button"
-              onClick={handleSaveMetrics}
-              className="btn-primary"
-              style={{ fontSize: '0.8rem', padding: '6px 12px' }}
-            >
-              <Save size={14} /> Save Log
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsEditingMetrics(false)}
-              className="btn btn-secondary"
-              style={{ fontSize: '0.8rem', padding: '6px 10px' }}
-            >
-              Cancel
-            </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '10px', width: '100%' }}>
+              <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span>Eggs (Crates):</span>
+                <input
+                  type="number"
+                  value={tempEggsCollected}
+                  onChange={(e) => setTempEggsCollected(parseInt(e.target.value) || 0)}
+                  style={{ width: '100%', padding: '6px 8px', backgroundColor: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: 'var(--radius-sm)', color: '#fff', fontSize: '16px' }}
+                />
+              </label>
+              <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span>Lay Rate %:</span>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={tempLayRate}
+                  onChange={(e) => setTempLayRate(parseFloat(e.target.value) || 0)}
+                  style={{ width: '100%', padding: '6px 8px', backgroundColor: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: 'var(--radius-sm)', color: '#fff', fontSize: '16px' }}
+                />
+              </label>
+              <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span>Feed (Bags):</span>
+                <input
+                  type="number"
+                  value={tempFeedBags}
+                  onChange={(e) => setTempFeedBags(parseInt(e.target.value) || 0)}
+                  style={{ width: '100%', padding: '6px 8px', backgroundColor: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: 'var(--radius-sm)', color: '#fff', fontSize: '16px' }}
+                />
+              </label>
+              <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span>Brooder (°C):</span>
+                <input
+                  type="number"
+                  step="0.5"
+                  value={tempBrooderTemp}
+                  onChange={(e) => setTempBrooderTemp(parseFloat(e.target.value) || 0)}
+                  style={{ width: '100%', padding: '6px 8px', backgroundColor: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: 'var(--radius-sm)', color: '#fff', fontSize: '16px' }}
+                />
+              </label>
+            </div>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={handleSaveMetrics}
+                className="btn-primary"
+                style={{ fontSize: '0.8rem', padding: '6px 14px' }}
+              >
+                <Save size={14} /> Save Daily Log
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsEditingMetrics(false)}
+                className="btn btn-secondary"
+                style={{ fontSize: '0.8rem', padding: '6px 12px' }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         ) : (
           <button

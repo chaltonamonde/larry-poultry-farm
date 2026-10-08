@@ -425,8 +425,8 @@ export const FinanceTab: React.FC = () => {
           </select>
         </div>
 
-        {/* Ledger Table (Responsive wrapper) */}
-        <div className="table-responsive">
+        {/* Ledger Table (Desktop view: >= 640px) */}
+        <div className="table-responsive hide-on-mobile-admin">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
             <thead>
               <tr style={{ backgroundColor: 'var(--bg-section-alt)', borderBottom: '1px solid var(--border-card)' }}>
@@ -498,6 +498,77 @@ export const FinanceTab: React.FC = () => {
               })}
             </tbody>
           </table>
+        </div>
+
+        {/* Ledger Cards (Mobile Phone View: < 640px) */}
+        <div className="show-on-mobile-admin" style={{ flexDirection: 'column', gap: '10px', width: '100%' }}>
+          {filteredTransactions.map((tx) => {
+            const isIncome = tx.type === 'income';
+            return (
+              <div
+                key={tx.id}
+                style={{
+                  backgroundColor: 'var(--bg-section-alt)',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '12px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span
+                      style={{
+                        fontSize: '0.7rem',
+                        fontWeight: 800,
+                        padding: '2px 8px',
+                        borderRadius: 'var(--radius-full)',
+                        backgroundColor: isIncome ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)',
+                        color: isIncome ? 'var(--primary-green)' : 'var(--accent-red)',
+                        border: `1px solid ${isIncome ? 'rgba(34, 197, 94, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
+                        textTransform: 'uppercase'
+                      }}
+                    >
+                      {tx.type}
+                    </span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                      {tx.date}
+                    </span>
+                  </div>
+
+                  <span
+                    style={{
+                      fontSize: '1rem',
+                      fontWeight: 800,
+                      color: isIncome ? 'var(--primary-green)' : 'var(--accent-red)'
+                    }}
+                  >
+                    {isIncome ? '+' : '-'} KES {tx.amountKes.toLocaleString()}
+                  </span>
+                </div>
+
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--text-primary)' }}>
+                    {tx.description}
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                    {tx.category} • {tx.recordedBy}
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-subtle)', paddingTop: '6px', fontSize: '0.72rem' }}>
+                  <span style={{ fontFamily: 'monospace', color: 'var(--accent-sky)' }}>
+                    {tx.referenceCode}
+                  </span>
+                  <span style={{ color: 'var(--text-secondary)' }}>
+                    {tx.paymentChannel}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 

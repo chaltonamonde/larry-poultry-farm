@@ -89,7 +89,7 @@ export const WholesaleTab: React.FC = () => {
       </div>
 
       {/* Filter Tabs */}
-      <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
+      <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px', scrollbarWidth: 'none' }}>
         {[
           { id: 'all', label: 'All Inquiries' },
           { id: 'new', label: 'New Inquiries' },

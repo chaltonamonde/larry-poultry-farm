@@ -101,7 +101,7 @@ export const MessagesTab: React.FC = () => {
           padding: '14px'
         }}
       >
-        <div style={{ display: 'flex', gap: '6px', overflowX: 'auto' }}>
+        <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', scrollbarWidth: 'none' }}>
           {[
             { id: 'all', label: 'All Inquiries' },
             { id: 'unread', label: 'Unread' },

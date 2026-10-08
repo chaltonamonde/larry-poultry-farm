@@ -120,7 +120,7 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ setActivePage })
         </div>
 
         {/* PIN Form */}
-        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           <div>
             <label
               htmlFor="admin-pin"
@@ -145,6 +145,8 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ setActivePage })
                 }}
                 placeholder="Enter 4-digit PIN (Default: 1234)"
                 autoFocus
+                maxLength={8}
+                inputMode="numeric"
                 style={{
                   width: '100%',
                   padding: '12px 44px 12px 14px',
@@ -152,8 +154,9 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ setActivePage })
                   border: errorMsg ? '1px solid var(--accent-red)' : '1px solid var(--border-card)',
                   borderRadius: 'var(--radius-md)',
                   color: 'var(--text-primary)',
-                  fontSize: '16px',
-                  letterSpacing: showPassword ? 'normal' : '0.2em',
+                  fontSize: '18px',
+                  textAlign: 'center',
+                  letterSpacing: showPassword ? 'normal' : '0.3em',
                   outline: 'none'
                 }}
               />
@@ -178,10 +181,59 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ setActivePage })
               </button>
             </div>
             {errorMsg && (
-              <span style={{ display: 'block', color: 'var(--accent-red)', fontSize: '0.78rem', marginTop: '6px' }}>
+              <span style={{ display: 'block', color: 'var(--accent-red)', fontSize: '0.78rem', marginTop: '6px', textAlign: 'center' }}>
                 {errorMsg}
               </span>
             )}
+          </div>
+
+          {/* Quick On-Screen Keypad for Mobile Phones */}
+          <div className="admin-pin-grid">
+            {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
+              <button
+                key={digit}
+                type="button"
+                onClick={() => {
+                  if (pin.length < 6) {
+                    const nextPin = pin + digit;
+                    setPin(nextPin);
+                    if (errorMsg) setErrorMsg('');
+                  }
+                }}
+                className="admin-pin-key"
+              >
+                {digit}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() => setPin('')}
+              className="admin-pin-key"
+              style={{ fontSize: '0.85rem', color: 'var(--accent-red)' }}
+            >
+              Clear
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (pin.length < 6) {
+                  const nextPin = pin + '0';
+                  setPin(nextPin);
+                  if (errorMsg) setErrorMsg('');
+                }
+              }}
+              className="admin-pin-key"
+            >
+              0
+            </button>
+            <button
+              type="button"
+              onClick={() => setPin(pin.slice(0, -1))}
+              className="admin-pin-key"
+              style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}
+            >
+              ⌫
+            </button>
           </div>
 
           <button
@@ -192,7 +244,8 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ setActivePage })
               justifyContent: 'center',
               padding: '12px 16px',
               fontSize: '0.95rem',
-              fontWeight: 700
+              fontWeight: 700,
+              marginTop: '4px'
             }}
           >
             <span>Unlock FarmOps Console</span>
@@ -201,7 +254,7 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ setActivePage })
         </form>
 
         {/* Quick Demo Login Option */}
-        <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid var(--border-subtle)' }}>
+        <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)' }}>
           <button
             type="button"
             onClick={handleQuickLogin}
@@ -211,19 +264,20 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({ setActivePage })
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
-              padding: '10px 14px',
-              backgroundColor: 'rgba(34, 197, 94, 0.08)',
-              border: '1px solid rgba(34, 197, 94, 0.25)',
+              padding: '11px 14px',
+              backgroundColor: 'rgba(34, 197, 94, 0.1)',
+              border: '1px solid rgba(34, 197, 94, 0.35)',
               borderRadius: 'var(--radius-md)',
               color: 'var(--primary-green)',
-              fontSize: '0.85rem',
-              fontWeight: 600,
+              fontSize: '0.86rem',
+              fontWeight: 700,
               cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              transition: 'all 0.2s ease',
+              minHeight: '44px'
             }}
           >
             <KeyRound size={16} />
-            <span>One-Click Manager Login (Demo PIN: 1234)</span>
+            <span>One-Click Manager Login (PIN: 1234)</span>
           </button>
         </div>
 

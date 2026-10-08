@@ -73,35 +73,20 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ setActivePage }) => {
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        backdropFilter: 'blur(10px)'
+        backdropFilter: 'blur(12px)'
       }}
     >
       {/* Top Banner Row */}
-      <div
-        style={{
-          borderBottom: '1px solid var(--border-subtle)',
-          padding: '8px 16px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '10px',
-          fontSize: '0.8rem'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--primary-green)',
-                boxShadow: '0 0 8px rgba(34, 197, 94, 0.8)'
-              }}
-            />
-            <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>Larry Poultry Farm ERP</span>
-            <span style={{ color: 'var(--text-muted)' }}>| Ruiru Main Facility</span>
+      <div className="admin-header-top">
+        <div className="admin-brand-group">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span className="admin-live-pulse" />
+            <span style={{ fontWeight: 800, color: 'var(--text-primary)', fontSize: '0.92rem', letterSpacing: '-0.01em' }}>
+              Larry Farm ERP
+            </span>
+            <span className="hide-on-mobile-admin" style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+              | Ruiru Facility
+            </span>
           </div>
 
           <span
@@ -112,26 +97,28 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ setActivePage }) => {
               border: '1px solid rgba(34, 197, 94, 0.25)',
               color: 'var(--primary-green)',
               fontSize: '0.72rem',
-              fontWeight: 600,
+              fontWeight: 700,
               display: 'inline-flex',
               alignItems: 'center',
               gap: '4px'
             }}
           >
-            <ShieldCheck size={12} /> Biosecure Tier-1
+            <ShieldCheck size={12} /> <span className="hide-on-mobile-admin">Biosecure</span> Tier-1
           </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+        <div className="admin-header-actions">
           {timeStr && (
             <span
+              className="hide-on-mobile-admin"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '5px',
                 color: 'var(--text-secondary)',
                 fontSize: '0.78rem',
-                fontFamily: 'monospace'
+                fontFamily: 'monospace',
+                marginRight: '4px'
               }}
             >
               <Clock size={13} color="var(--accent-sky)" /> {timeStr}
@@ -143,20 +130,21 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ setActivePage }) => {
             onClick={exportReportJson}
             style={{
               background: 'none',
-              border: 'none',
+              border: '1px solid var(--border-card)',
               color: 'var(--text-secondary)',
               fontSize: '0.78rem',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '4px',
+              gap: '5px',
               cursor: 'pointer',
-              padding: '2px 6px',
-              borderRadius: 'var(--radius-sm)'
+              padding: '5px 8px',
+              borderRadius: 'var(--radius-md)',
+              minHeight: '36px'
             }}
             title="Download JSON Report Backup"
           >
-            <Download size={13} />
-            <span className="hide-on-very-small">Backup Data</span>
+            <Download size={14} />
+            <span className="hide-on-mobile-admin">Backup</span>
           </button>
 
           <button
@@ -166,18 +154,20 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ setActivePage }) => {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '5px',
-              padding: '4px 10px',
+              padding: '5px 10px',
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border-card)',
               borderRadius: 'var(--radius-md)',
               color: 'var(--text-primary)',
               fontSize: '0.78rem',
               fontWeight: 600,
-              cursor: 'pointer'
+              cursor: 'pointer',
+              minHeight: '36px'
             }}
+            title="Switch to Customer Storefront"
           >
-            <Store size={13} color="var(--primary-green)" />
-            <span>Storefront</span>
+            <Store size={14} color="var(--primary-green)" />
+            <span>Store</span>
           </button>
 
           <button
@@ -187,14 +177,15 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ setActivePage }) => {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '4px',
-              padding: '4px 8px',
-              backgroundColor: 'rgba(239, 68, 68, 0.1)',
-              border: '1px solid rgba(239, 68, 68, 0.25)',
+              padding: '5px 10px',
+              backgroundColor: 'rgba(239, 68, 68, 0.12)',
+              border: '1px solid rgba(239, 68, 68, 0.28)',
               borderRadius: 'var(--radius-md)',
               color: 'var(--accent-red)',
               fontSize: '0.78rem',
-              fontWeight: 600,
-              cursor: 'pointer'
+              fontWeight: 700,
+              cursor: 'pointer',
+              minHeight: '36px'
             }}
             title="Lock FarmOps Console"
           >
@@ -205,15 +196,7 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ setActivePage }) => {
       </div>
 
       {/* Main Navigation Tabs */}
-      <div
-        style={{
-          display: 'flex',
-          gap: '6px',
-          overflowX: 'auto',
-          padding: '8px 16px',
-          scrollbarWidth: 'thin'
-        }}
-      >
+      <nav aria-label="Admin Navigation" className="admin-tabs-nav">
         {tabs.map((tab) => {
           const isActive = activeAdminTab === tab.id;
           return (
@@ -221,30 +204,16 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ setActivePage }) => {
               key={tab.id}
               type="button"
               onClick={() => setActiveAdminTab(tab.id)}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '8px 14px',
-                borderRadius: 'var(--radius-md)',
-                fontSize: '0.84rem',
-                fontWeight: isActive ? 700 : 500,
-                color: isActive ? '#07130e' : 'var(--text-secondary)',
-                backgroundColor: isActive ? 'var(--primary-green)' : 'transparent',
-                border: isActive ? '1px solid var(--primary-green)' : '1px solid transparent',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                transition: 'all 0.15s ease'
-              }}
+              className={`admin-tab-btn ${isActive ? 'active' : ''}`}
             >
               <span style={{ display: 'flex', alignItems: 'center', color: isActive ? '#07130e' : tab.color || 'inherit' }}>
                 {tab.icon}
               </span>
-              <span>{tab.label}</span>
+              <span className="tab-label-text">{tab.label}</span>
               {typeof tab.badge === 'number' && tab.badge > 0 && (
                 <span
                   style={{
-                    backgroundColor: isActive ? 'rgba(0, 0, 0, 0.3)' : 'var(--accent-amber)',
+                    backgroundColor: isActive ? 'rgba(0, 0, 0, 0.35)' : 'var(--accent-amber)',
                     color: isActive ? '#ffffff' : '#07130e',
                     fontSize: '0.7rem',
                     fontWeight: 800,
@@ -259,7 +228,8 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ setActivePage }) => {
             </button>
           );
         })}
-      </div>
+      </nav>
     </header>
+
   );
 };

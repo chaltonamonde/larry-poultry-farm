@@ -27,8 +27,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ setActivePage }) => {
     <div style={{ minHeight: '100vh', width: '100%', backgroundColor: 'var(--bg-page)', display: 'flex', flexDirection: 'column' }}>
       <AdminHeader setActivePage={setActivePage} />
 
-      <main style={{ flex: 1, width: '100%', padding: 'clamp(16px, 3vw, 32px) 0' }}>
-        <div className="container">
+      <main style={{ flex: 1, width: '100%', padding: 'clamp(14px, 3vw, 28px) 0 clamp(48px, 8vw, 88px) 0' }}>
+        <div className="container" style={{ minWidth: 0 }}>
           {activeAdminTab === 'overview' && <OverviewTab />}
           {activeAdminTab === 'finance' && <FinanceTab />}
           {activeAdminTab === 'orders' && <OrdersTab />}
